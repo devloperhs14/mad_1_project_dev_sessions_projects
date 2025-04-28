@@ -88,7 +88,7 @@ Use the search bar to find an entry by its ID. The result will be displayed belo
 
 ## Project Structure
 ```
-MAD-1-PROJECT-PRACTICE/
+watchman_entry_book/
 ├── app.py
 ├── config.py
 ├── database.py
