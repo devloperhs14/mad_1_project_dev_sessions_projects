@@ -1,4 +1,4 @@
-# Homework 1
+# User Input Display With Timestamp
 
 A Python project, likely using the Flask framework.
 
