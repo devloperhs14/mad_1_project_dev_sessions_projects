@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Sample App</title>
+    </head>
+    <body>
+        <h2>Enter a value</h2>
+        <form method="post">
+            <input type="text" name="input_value" placeholder="Enter a value" required>
+            <input type="submit" value="Submit">
+        </form>
+        {% if value %}
+        <h3>Submitted Value: {{ value }}</h3>
+        <p>TimeStamp: {{ timestamp }}</p>
+        {% endif %}
+    </body>
+</html>
