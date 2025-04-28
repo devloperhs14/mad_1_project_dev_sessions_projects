@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- head: metadata and styles -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Parking Slot</title>
+    <style>
+        body { font-family: sans-serif; }
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 5px; }
+        th { background-color: #f2f2f2; }
+        form div { margin-bottom: 10px; }
+        label { display: inline-block; width: 100px; }
+
+        .slots-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+            max-width: 400px;
+        }
+        .slot-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slot-available {
+            background-color: lightgreen;
+            border-color: green;
+        }
+        .slot-booked {
+            background-color: lightcoral;
+            border-color: red;
+            color: #555;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<!-- Body:page content, booking form, availibilty -->
+<body>
+
+    <h1>Book a Parking Slot</h1>
+
+    <!-- Form for booking a parking slot -->
+    <form action="/book" method="POST">
+        <div>
+            <label for="name_input">Name:</label>
+            <input type="text" id="name_input" name="name" required>
+        </div>
+        <div>
+            <label for="vehicle_input">Vehicle No:</label>
+            <input type="text" id="vehicle_input" name="vehicle_no" required>
+        </div>
+        <div>
+            <label for="lot_input">Lot ID:</label>
+            <input type="number" id="lot_input" name="lot_id" value="{{ lot_id }}" readonly>
+        </div>
+        <div>
+            <label for="slot_select">Slot ID:</label>
+            <select id="slot_select" name="slot_id" required>
+                <option value="">--Choose Available Slot--</option>
+                {% for slot_num in available_slots %}
+                    <option value="{{ slot_num }}">{{ slot_num }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <button type="submit">Book Slot</button>
+        </div>
+    </form>
+
+    <hr>
+
+    <!-- Section displaying the status of all parking slots -->
+    <h2>Slot Status Overview</h2>
+
+    <div class="slots-container">
+        {% for i in range(1, total_slots + 1) %}
+            {% if i in available_slots %}
+                <div class="slot-box slot-available">
+                    Slot {{ i }}<br>(Available)
+                </div>
+            {% else %}
+                <div class="slot-box slot-booked">
+                    Slot {{ i }}<br>(Booked)
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <hr>
+    <!-- Link to the admin view page -->
+    <p>
+        <a href="/admin">View Admin Page</a>
+    </p>
+
+</body>
+</html>

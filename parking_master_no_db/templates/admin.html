@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parking Admin View</title>
+    <style>
+        /* Optional basic styling with colour change*/
+        body { font-family: sans-serif; }
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 8px; }
+        th { background-color: #f2f2f2; text-align: left; }
+        .status-available { color: green; font-weight: bold; }
+        .status-booked { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>Admin View - Parking Status</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Lot ID</th>
+                <th>Slot ID</th>
+                <th>Status</th>
+                <th>Booked By (Name)</th>
+                <th>Vehicle No</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through all possible slot numbers (1 to total_slots) -->
+            {% for slot_num in range(1, total_slots + 1) %}
+                {% set booking_info = bookings.get(slot_num) %} {# Get booking details if they exist #}
+                <tr>
+                    <td>1</td> {# Assuming Lot ID is always 1 #}
+                    <td>{{ slot_num }}</td> {# The current slot number #}
+
+                    {% if booking_info %}
+                        {# Slot is Booked #}
+                        <td class="status-booked">Booked</td>
+                        <td>{{ booking_info['name'] }}</td>
+                        <td>{{ booking_info['vehicle_id'] }}</td>
+                    {% else %}
+                        {# Slot is Available #}
+                        <td class="status-available">Available</td>
+                        <td>-</td> {# Placeholder for empty cells #}
+                        <td>-</td> {# Placeholder for empty cells #}
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <p>
+        <a href="/">Back to User Booking Page</a> <!-- Link back to the main user page -->
+    </p>
+</body>
+</html>
